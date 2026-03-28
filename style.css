@@ -14,6 +14,10 @@ body.dark {
   color: #f0f0f0;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 .card {
   width: 140px;
   height: 170px;
@@ -183,7 +187,7 @@ span {
   position: absolute;
   right: 10px;
   top: 20px;
-  --toggle-size: 20px;
+  --toggle-size: 15px;
   /* the size is adjusted using font-size,
      this is not transform scale,
      so you can choose any size */
@@ -403,8 +407,8 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   overflow: hidden;
   background-color: rgb(252, 252, 252);
   padding: 15px;
@@ -414,6 +418,21 @@ span {
   transition: all 0.5s;
 }
 .tab:hover {
+  background-color: rgb(213, 213, 213);
+  opacity: 0.8;
+}
+
+.tab-current {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  text-decoration: none;
   background-color: rgb(213, 213, 213);
   opacity: 0.8;
 }
