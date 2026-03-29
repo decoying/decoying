@@ -24,7 +24,7 @@ function toggleSearch() {
   }
 }
 
-// Stäng med Escape
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     document.getElementById('searchWrapper').classList.remove('open');

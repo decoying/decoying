@@ -41,7 +41,7 @@ body.no-scroll {
       rgba(255, 255, 255, 0.06),
       rgba(255, 255, 255, 0.02)
     ),
-    #1a1a2e !important; /* 👈 dark base, always visible beneath the glass layers */
+    #1a1a2e !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 
@@ -188,13 +188,9 @@ span {
   right: 10px;
   top: 20px;
   --toggle-size: 15px;
-  /* the size is adjusted using font-size,
-     this is not transform scale,
-     so you can choose any size */
   --container-width: 5.625em;
   --container-height: 2.5em;
   --container-radius: 06.25em;
-  /* radius 0 - minecraft mode :) */
   --container-light-bg: #3D7EAE;
   --container-night-bg: #1D1F2C;
   --circle-container-diameter: 3.375em;
