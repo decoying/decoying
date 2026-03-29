@@ -8,7 +8,7 @@
     <script src="/assets/js/script.js" defer></script>
 </head>
 <body class="no-scroll">
-        <label class="theme-switch">
+    <label class="theme-switch">
     <input type="checkbox" class="theme-switch__checkbox" id="theme-toggle">
     <div class="theme-switch__container">
         <div class="theme-switch__clouds"></div>
@@ -30,13 +30,14 @@
     </label>
 
 <div class="navc">
+  <!-- Navbar -->
   <div class="navigation-card">
     <a href="/" class="tab">
       <svg class="svgIcon" viewBox="0 0 104 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M100.5 40.75V96.5H66V68.5V65H62.5H43H39.5V68.5V96.5H3.5V40.75L52 4.375L100.5 40.75Z" stroke="black" stroke-width="7"></path>
       </svg>
     </a>
-    <a href="/about" class="tab-current">
+    <a href="/about/" class="tab-current">
       <svg width="104" height="100" viewBox="0 0 104 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="21.5" y="3.5" width="60" height="60" rx="30" stroke="black" stroke-width="7"></rect>
         <g clip-path="url(#clip0_41_27)">
@@ -56,6 +57,7 @@
     </a>
   </div>
 
+  <!-- Sök (separat kort) -->
   <div class="search-wrapper" id="searchWrapper">
     <button class="search-btn" id="searchBtn" onclick="toggleSearch()">
       <svg

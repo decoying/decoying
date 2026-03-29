@@ -41,7 +41,7 @@ body.no-scroll {
       rgba(255, 255, 255, 0.06),
       rgba(255, 255, 255, 0.02)
     ),
-    #1a1a2e !important;
+    #1a1a2e !important; /* 👈 dark base, always visible beneath the glass layers */
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 
@@ -188,9 +188,13 @@ span {
   right: 10px;
   top: 20px;
   --toggle-size: 15px;
+  /* the size is adjusted using font-size,
+     this is not transform scale,
+     so you can choose any size */
   --container-width: 5.625em;
   --container-height: 2.5em;
   --container-radius: 06.25em;
+  /* radius 0 - minecraft mode :) */
   --container-light-bg: #3D7EAE;
   --container-night-bg: #1D1F2C;
   --circle-container-diameter: 3.375em;
@@ -385,6 +389,16 @@ span {
   transform: translateY(-50%);
 }
 
+.navc {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  position: fixed; /* Flytta fixed hit istället */
+  /* Lägg till din position här, t.ex: */
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 .navigation-card {
   width: fit-content;
@@ -396,8 +410,7 @@ span {
   background-color: rgb(255, 255, 255);
   padding: 15px 20px;
   border-radius: 50px;
-  position: fixed;
-  bottom: 20px;
+  /* Ingen position: fixed här längre */
 }
 .tab {
   display: flex;
@@ -431,4 +444,58 @@ span {
   text-decoration: none;
   background-color: rgb(213, 213, 213);
   opacity: 0.8;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.4s ease, border-radius 0.4s ease;
+  width: 70px;
+  height: 70px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+}
+
+.search-wrapper.open {
+  width: 250px;
+  border-radius: 50px;
+  justify-content: flex-start;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.search-btn svg {
+  width: 22px;
+  height: 22px;
+}
+.search-input {
+  width: 0;
+  opacity: 0;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+  transition: opacity 0.4s ease;
+  padding: 0;
+}
+
+.search-wrapper.open .search-input {
+  width: 100%;
+  opacity: 1;
+  padding: 0 10px;
 }
