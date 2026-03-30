@@ -1,8 +1,8 @@
 body {
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100dvh; /* dvh fixes mobile browser chrome overlap */
   font-family: "Poppins", sans-serif;
   background: #454545;
   color: #111;
@@ -18,208 +18,54 @@ body.no-scroll {
   overflow: hidden;
 }
 
-.card {
-  width: 140px;
-  height: 170px;
-  border-radius: 22px;
-  position: fixed;
-  overflow: hidden;
-  bottom: 0;
-  right: 0;
-
-  display: grid;
-  place-items: center;
-  color: #fff !important;
-
-  background: radial-gradient(
-      120% 120% at 20% 0%,
-      rgba(255, 255, 255, 0.08),
-      transparent 55%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.06),
-      rgba(255, 255, 255, 0.02)
-    ),
-    #1a1a2e !important; /* 👈 dark base, always visible beneath the glass layers */
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-
-  transition:
-    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    border-color 220ms ease;
-  will-change: transform;
-  font-size: clamp(8px, 1.8vw, 16px);
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: -60px;
-  background: radial-gradient(
-      circle at 30% 20%,
-      rgba(120, 170, 255, 0.22),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 70% 80%,
-      rgba(160, 90, 255, 0.18),
-      transparent 50%
-    );
-  filter: blur(18px);
-  opacity: 0.55;
-  transition: opacity 220ms ease;
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12),
-    transparent 40%
-  );
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.img {
-  height: 62%;
-  position: absolute;
-  z-index: 1;
-
-  opacity: 0.92;
-  transform: translateY(2px) scale(1);
-  transition:
-    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 260ms ease,
-    filter 260ms ease;
-  will-change: transform;
-}
-
-.textBox {
-  z-index: 2;
-  width: 100%;
-  padding: 1.1em 1.1em 1em;
-
-  display: grid;
-  gap: 0.6em;
-  justify-items: center;
-
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 200ms ease,
-    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.head {
-  margin: 0;
-  font-size: 1.4em;
-  letter-spacing: 0.2px;
-}
-
-span {
-  font-size: 0.7em;
-  color: rgba(255, 255, 255, 0.42);
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.price {
-  margin: 0;
-  font-size: 1.4em;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-}
-
-.currency {
-  font-size: 0.875em;
-  opacity: 0.85;
-  margin-right: 2px;
-}
-
-.card:hover,
-.card:focus-visible {
-  transform: translateY(-4px) scale(1.03);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
-}
-
-.card:hover::before,
-.card:focus-visible::before {
-  opacity: 0.85;
-}
-
-.card:hover .textBox,
-.card:focus-visible .textBox {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.card:hover .img,
-.card:focus-visible .img {
-  transform: translateY(-10px) scale(1.04);
-  opacity: 0.35;
-
-  filter: blur(2px);
-}
-
-.card:hover .img {
-  animation: float 4.8s ease-in-out infinite;
-  filter: blur(2px);
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(4px);
-  }
-  50% {
-    transform: translateY(-16px);
-  }
-}
-
+/* ── Navigation container ── */
 .navc {
   display: flex;
-  gap: 12px;
+  gap: clamp(6px, 2vw, 12px);
   align-items: center;
-  position: fixed; /* Flytta fixed hit istället */
-  /* Lägg till din position här, t.ex: */
-  bottom: 30px;
+  position: fixed;
+  bottom: calc(20px + env(safe-area-inset-bottom)); /* clears iOS home bar */
   left: 50%;
   transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 24px); /* never bleed off-screen */
 }
 
+/* ── Nav pill ── */
 .navigation-card {
   width: fit-content;
   height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: clamp(14px, 4vw, 28px); 
   background-color: rgb(255, 255, 255);
-  padding: 15px 20px;
+  padding: clamp(4px, 1vw, 7px) clamp(18px, 5vw, 32px);
   border-radius: 50px;
-  /* Ingen position: fixed här längre */
 }
+
+/* ── Tabs ── */
 .tab {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  /* minimum 44×44 touch target */
+  width: clamp(24px, 5vw, 20px);
+  height: clamp(24px, 5vw, 20px);
+  min-width: 44px;
+  min-height: 44px;
   overflow: hidden;
   background-color: rgb(252, 252, 252);
-  padding: 15px;
+  padding: clamp(10px, 2vw, 15px);
   border-radius: 50%;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.5s;
+  -webkit-tap-highlight-color: transparent; /* remove grey flash on iOS */
 }
-.tab:hover {
+
+.tab:hover,
+.tab:active {
   background-color: rgb(213, 213, 213);
   opacity: 0.8;
 }
@@ -228,17 +74,21 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
-  height: 25px;
+  width: clamp(24px, 5vw, 25px);
+  height: clamp(24px, 5vw, 25px);
+  min-width: 44px;
+  min-height: 44px;
   overflow: hidden;
-  padding: 15px;
+  padding: clamp(10px, 2vw, 15px);
   border-radius: 50%;
   cursor: pointer;
   text-decoration: none;
   background-color: rgb(213, 213, 213);
   opacity: 0.8;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* ── Search ── */
 .search-wrapper {
   position: relative;
   display: flex;
@@ -246,14 +96,15 @@ span {
   justify-content: center;
   overflow: hidden;
   transition: width 0.4s ease, border-radius 0.4s ease;
-  width: 70px;
-  height: 70px;
+  width: clamp(50px, 12vw, 70px);
+  height: clamp(50px, 12vw, 70px);
   background-color: rgb(255, 255, 255);
   border-radius: 50%;
 }
 
 .search-wrapper.open {
-  width: 250px;
+  /* expand to almost full viewport width on small screens */
+  width: clamp(200px, 60vw, 250px);
   border-radius: 50px;
   justify-content: flex-start;
 }
@@ -267,21 +118,23 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: clamp(44px, 10vw, 60px); /* 44px minimum touch target */
+  height: clamp(44px, 10vw, 60px);
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .search-btn svg {
-  width: 22px;
-  height: 22px;
+  width: clamp(18px, 4vw, 22px);
+  height: clamp(18px, 4vw, 22px);
 }
+
 .search-input {
   width: 0;
   opacity: 0;
   border: none;
   outline: none;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 3vw, 1rem);
   background: transparent;
   transition: opacity 0.4s ease;
   padding: 0;
@@ -293,32 +146,31 @@ span {
   padding: 0 10px;
 }
 
+/* ── Theme toggle ── */
 .theme-toggle-wrapper {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: clamp(12px, 3vw, 20px);
+  right: clamp(12px, 3vw, 20px);
   z-index: 1000;
 }
 
 .theme-checkbox {
-  --toggle-size: 12px;
+  /* scale toggle down on very small screens */
+  --toggle-size: clamp(9px, 2.5vw, 12px);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   width: 6.25em;
   height: 3.125em;
-  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #efefef), color-stop(50%, #2a2a2a)) no-repeat;
-  background: -o-linear-gradient(left, #efefef 50%, #2a2a2a 50%) no-repeat;
   background: linear-gradient(to right, #efefef 50%, #2a2a2a 50%) no-repeat;
   background-size: 205%;
   background-position: 0;
-  -webkit-transition: 0.4s;
-  -o-transition: 0.4s;
   transition: 0.4s;
   border-radius: 99em;
   position: relative;
   cursor: pointer;
   font-size: var(--toggle-size);
+  touch-action: manipulation; /* prevents 300ms tap delay */
 }
 
 .theme-checkbox::before {
@@ -328,14 +180,10 @@ span {
   position: absolute;
   top: 0.438em;
   left: 0.438em;
-  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #efefef), color-stop(50%, #2a2a2a)) no-repeat;
-  background: -o-linear-gradient(left, #efefef 50%, #2a2a2a 50%) no-repeat;
   background: linear-gradient(to right, #efefef 50%, #2a2a2a 50%) no-repeat;
   background-size: 205%;
   background-position: 100%;
   border-radius: 50%;
-  -webkit-transition: 0.4s;
-  -o-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -346,4 +194,23 @@ span {
 
 .theme-checkbox:checked {
   background-position: 100%;
+}
+
+/* ── Small screen tweaks (≤ 480px) ── */
+@media (max-width: 480px) {
+  .navc {
+    gap: 8px;
+    /* tighten vertical clearance if viewport is short */
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .navigation-card {
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .search-wrapper.open {
+    /* nearly full width on phones */
+    width: calc(100vw - 80px);
+  }
 }
